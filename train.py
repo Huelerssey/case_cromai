@@ -1,5 +1,7 @@
 import os
+import re
 import cv2 # OpenCV ou cv2 para tratamento de imagens;
+import pandas as pd
 import numpy as np # Numpy para trabalharmos com matrizes n-dimensionais
 from keras.models import Sequential # Importando modelo sequencial
 from keras.layers.convolutional import Conv2D, MaxPooling2D # Camada de convolução e max pooling
@@ -11,7 +13,16 @@ from tensorflow.data import AUTOTUNE
 from tensorflow.keras.utils import image_dataset_from_directory # Função que carrega o dataset de um diretório
 
 
-
+# controla a versão do código
+def get_latest_version(models_path):
+    # Lista todos os arquivos no diretório de modelos
+    files = os.listdir(models_path)
+    
+    # Extrai os números das versões dos nomes dos arquivos usando regex
+    versions = [int(re.search(r'V(\d+)', file).group(1)) for file in files if re.search(r'V(\d+)', file)]
+    
+    # Retorna o número da última versão; se nenhuma versão for encontrada, retorna 0
+    return max(versions, default=0)
 
 def create_lenet(input_shape):
     """
@@ -49,7 +60,7 @@ def create_lenet(input_shape):
 
 
 if __name__ == "__main__":
-    train_path = "./cats_and_dogs" # Adicione aqui o caminho para chegar no diretório que contém as imagens de treino na sua maquina
+    train_path = "dataset/cats_and_dogs" # Adicione aqui o caminho para chegar no diretório que contém as imagens de treino na sua maquina
     models_path = "models" # Defina aqui onde serão salvos os modelos na sua maquina
     width = 100 # Tamanho da largura da janela que será utilizada pelo modelo
     height = 100 # Tamanho da altura da janela que será utilizada pelo modelo
@@ -59,7 +70,8 @@ if __name__ == "__main__":
     init_lr = 1e-3 # Taxa de aprendizado a ser utilizado pelo optimizador
     batch_size = 32 # Tamanho dos lotes utilizados por cada epoca
     input_shape = (height, width, depth) # entrada do modelo
-    save_model = os.path.join(models_path, "lenet-{epoch:02d}-{accuracy:.3f}-{val_accuracy:.3f}.model")
+    latest_version = get_latest_version(models_path) # adiciona um versionador de modelo antes de salvar
+    save_model = os.path.join(models_path, f"lenet-{{epoch:02d}}-{{accuracy:.3f}}-{{val_accuracy:.3f}}-V{latest_version + 1}.model") # salva o modelo versionado
     color_mode = {1:"grayscale", 3: "rgb"} # Usado para selecionar o colormode em função da variável depth
 
     os.makedirs(models_path, exist_ok=True)
@@ -111,3 +123,22 @@ if __name__ == "__main__":
                 verbose=1,
                 callbacks=callbacks_list
     )
+
+
+    # Verifica se já existe um arquivo salvo
+    if os.path.exists('results/resultados.csv'):
+        # Se o arquivo já existir, ele será lido
+        old_results = pd.read_csv('results/resultados.csv')
+    else:
+        # Se o arquivo não existir, cria um DataFrame vazio com a mesma estrutura
+        old_results = pd.DataFrame(columns=['loss', 'accuracy', 'val_loss', 'val_accuracy', 'experiment_description'])
+
+    # cria o novo DataFrame com os resultados atuais
+    results_df = pd.DataFrame(H.history)
+    results_df['experiment_description'] = 'V1: Resultados do modelo inicial sem alterações'
+
+    # Concatena os antigos resultados com os novos
+    final_results = pd.concat([old_results, results_df], ignore_index=True)
+
+    # Salva o DataFrame final no arquivo CSV
+    final_results.to_csv('results/resultados.csv', index=False)
