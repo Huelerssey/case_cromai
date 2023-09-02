@@ -6,11 +6,12 @@ import numpy as np # Numpy para trabalharmos com matrizes n-dimensionais
 from keras.models import Sequential # Importando modelo sequencial
 from keras.layers.convolutional import Conv2D, MaxPooling2D # Camada de convolução e max pooling
 from keras.layers.core import Activation, Flatten, Dense # Camada da função de ativação, flatten, entre outros
-from keras.layers import Rescaling # Camada de escalonamento
+from keras.layers import Rescaling, Dropout # Camada de escalonamento
 from keras.optimizers import Adam # optimizador Adam
 from keras.callbacks import ModelCheckpoint # Classe utilizada para acompanhamento durante o treinamento onde definimos os atributos que serão considerados para avaliação
+from keras.preprocessing.image import ImageDataGenerator # Gerador de imagens
+from keras.utils import image_dataset_from_directory # Função que carrega o dataset de um diretório
 from tensorflow.data import AUTOTUNE
-from tensorflow.keras.utils import image_dataset_from_directory # Função que carrega o dataset de um diretório
 
 
 # controla a versão do código
@@ -42,21 +43,25 @@ def create_lenet(input_shape):
     model.add(Conv2D(32, (3, 3), padding="same", input_shape=input_shape))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(Dropout(0.20))
 
     # Segunda camada do modelo:
     model.add(Conv2D(64, (3, 3), padding="same"))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(Dropout(0.20))
 
     # Terceira camada do modelo:
     model.add(Conv2D(128, (3, 3), padding="same"))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(Dropout(0.20))
 
     # Primeira camada fully connected
     model.add(Flatten())
     model.add(Dense(510))
     model.add(Activation("relu"))
+    model.add(Dropout(0.5))
 
     # Classificador softmax
     model.add(Dense(classes))
@@ -67,8 +72,8 @@ def create_lenet(input_shape):
 if __name__ == "__main__":
     train_path = "dataset/cats_and_dogs" # Adicione aqui o caminho para chegar no diretório que contém as imagens de treino na sua maquina
     models_path = "models" # Defina aqui onde serão salvos os modelos na sua maquina
-    width = 100 # Tamanho da largura da janela que será utilizada pelo modelo
-    height = 100 # Tamanho da altura da janela que será utilizada pelo modelo
+    width = 64 # Tamanho da largura da janela que será utilizada pelo modelo
+    height = 64 # Tamanho da altura da janela que será utilizada pelo modelo
     depth = 3 # Profundidade das janelas utilizadas pelo modelo, caso seja RGB use 3, caso escala de cinza 1
     classes = 2 # Quantidade de classes que o modelo utilizará
     epochs = 10 # Quantidade de épocas (a quantidade de iterações que o modelo realizará durante o treinamento)
@@ -81,11 +86,24 @@ if __name__ == "__main__":
 
     os.makedirs(models_path, exist_ok=True)
 
+    # gera mais imagens para implementar o dataset
+    datagen = ImageDataGenerator(
+                            rotation_range=20,
+                            zoom_range=0.15,
+                            width_shift_range=0.2,
+                            height_shift_range=0.2,
+                            shear_range=0.15,
+                            horizontal_flip=True,
+                            vertical_flip=True,
+                            fill_mode="nearest",
+                            brightness_range=[0.5, 1.5]
+    )
+
     train_ds = image_dataset_from_directory(
                             train_path,
                             seed=123,
                             label_mode='categorical',
-                            validation_split=0.3,
+                            validation_split=0.2,
                             subset="training",
                             color_mode=color_mode[depth],
                             image_size=(height, width),
@@ -96,7 +114,7 @@ if __name__ == "__main__":
                             train_path,
                             seed=123,
                             label_mode='categorical',
-                            validation_split=0.3,
+                            validation_split=0.2,
                             subset="validation",
                             color_mode=color_mode[depth],
                             image_size=(height, width),
@@ -129,7 +147,6 @@ if __name__ == "__main__":
                 callbacks=callbacks_list
     )
 
-
     # Verifica se já existe um arquivo salvo
     if os.path.exists('results/resultados.csv'):
         # Se o arquivo já existir, ele será lido
@@ -140,7 +157,7 @@ if __name__ == "__main__":
 
     # cria o novo DataFrame com os resultados atuais
     results_df = pd.DataFrame(H.history)
-    results_df['experiment_description'] = "V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+    results_df['experiment_description'] = "V3: Inclusao de camadas de dropout para mitigar o overfitting e promover a generalizacao. Aumento de dados com tecnicas como zoom e rotacao para enriquecer o conjunto de treinamento e melhorar a robustez. Reducao da resolucao da imagem para 64x64 para acelerar o treinamento e focar em caracteristicas mais genericas. Ajuste na divisao de treino/teste para 80/20, permitindo mais dados para treinamento."
 
     # Concatena os antigos resultados com os novos
     final_results = pd.concat([old_results, results_df], ignore_index=True)
