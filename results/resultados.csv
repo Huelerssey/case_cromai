@@ -1,12 +1,21 @@
 loss,accuracy,val_loss,val_accuracy,experiment_description
-0.6835878491401672,0.576628565788269,0.6534609198570251,0.6140000224113464,V1: Resultados do modelo inicial sem alterações
-0.5994151830673218,0.6796571612358093,0.5869452357292175,0.699733316898346,V1: Resultados do modelo inicial sem alterações
-0.5011709332466125,0.756514310836792,0.5222409963607788,0.7512000203132629,V1: Resultados do modelo inicial sem alterações
-0.3940431475639343,0.8198285698890686,0.579592227935791,0.7468000054359436,V1: Resultados do modelo inicial sem alterações
-0.26961126923561096,0.8869143128395081,0.788435697555542,0.7301333546638489,V1: Resultados do modelo inicial sem alterações
-0.14881572127342224,0.9449714422225952,1.0171971321105957,0.7374666929244995,V1: Resultados do modelo inicial sem alterações
-0.07851248979568481,0.9745714068412781,1.2390035390853882,0.7193333506584167,V1: Resultados do modelo inicial sem alterações
-0.050286732614040375,0.9861714243888855,1.2183847427368164,0.7408000230789185,V1: Resultados do modelo inicial sem alterações
-0.026961591094732285,0.9923999905586243,1.4219063520431519,0.7358666658401489,V1: Resultados do modelo inicial sem alterações
-0.02244052290916443,0.9934285879135132,1.4488515853881836,0.7372000217437744,V1: Resultados do modelo inicial sem alterações
-
+0.6835878491401672,0.576628565788269,0.6534609198570251,0.6140000224113464,V1: Resultados do modelo inicial sem alteracoes
+0.5994151830673218,0.6796571612358093,0.5869452357292175,0.699733316898346,V1: Resultados do modelo inicial sem alteracoes
+0.5011709332466125,0.756514310836792,0.5222409963607788,0.7512000203132629,V1: Resultados do modelo inicial sem alteracoes
+0.3940431475639343,0.8198285698890686,0.579592227935791,0.7468000054359436,V1: Resultados do modelo inicial sem alteracoes
+0.2696112692356109,0.8869143128395081,0.788435697555542,0.7301333546638489,V1: Resultados do modelo inicial sem alteracoes
+0.1488157212734222,0.9449714422225952,1.0171971321105957,0.7374666929244995,V1: Resultados do modelo inicial sem alteracoes
+0.0785124897956848,0.974571406841278,1.2390035390853882,0.7193333506584167,V1: Resultados do modelo inicial sem alteracoes
+0.0502867326140403,0.9861714243888856,1.2183847427368164,0.7408000230789185,V1: Resultados do modelo inicial sem alteracoes
+0.0269615910947322,0.9923999905586244,1.421906352043152,0.7358666658401489,V1: Resultados do modelo inicial sem alteracoes
+0.0224405229091644,0.9934285879135132,1.4488515853881836,0.7372000217437744,V1: Resultados do modelo inicial sem alteracoes
+0.6589341163635254,0.6115999817848206,0.6088802218437195,0.6621333360671997,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.5458498597145081,0.7244571447372437,0.5101935267448425,0.7458666563034058,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.46020230650901794,0.7814285755157471,0.4523012340068817,0.7929333448410034,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.37333905696868896,0.831257164478302,0.4769802391529083,0.7854666709899902,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.27449020743370056,0.883485734462738,0.49035003781318665,0.807200014591217,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.18057075142860413,0.9274285435676575,0.6285209655761719,0.8029333353042603,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.10740615427494049,0.9581142663955688,0.7838817834854126,0.7975999712944031,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.06380712985992432,0.9777714014053345,0.8923305869102478,0.8006666898727417,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.04608003795146942,0.9843999743461609,1.0563105344772339,0.7818666696548462,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
+0.04014945030212402,0.9863428473472595,0.9910107254981995,0.7979999780654907,"V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"

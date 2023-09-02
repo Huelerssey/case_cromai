@@ -39,18 +39,23 @@ def create_lenet(input_shape):
     model = Sequential()
 
     # Primeira camada do modelo:
-    model.add(Conv2D(20, (5, 5), padding="same", input_shape=input_shape))
+    model.add(Conv2D(32, (3, 3), padding="same", input_shape=input_shape))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Segunda camada do modelo:
-    model.add(Conv2D(50, (5, 5), padding="same"))
+    model.add(Conv2D(64, (3, 3), padding="same"))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+
+    # Terceira camada do modelo:
+    model.add(Conv2D(128, (3, 3), padding="same"))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Primeira camada fully connected
     model.add(Flatten())
-    model.add(Dense(500))
+    model.add(Dense(510))
     model.add(Activation("relu"))
 
     # Classificador softmax
@@ -64,7 +69,7 @@ if __name__ == "__main__":
     models_path = "models" # Defina aqui onde serão salvos os modelos na sua maquina
     width = 100 # Tamanho da largura da janela que será utilizada pelo modelo
     height = 100 # Tamanho da altura da janela que será utilizada pelo modelo
-    depth = 1 # Profundidade das janelas utilizadas pelo modelo, caso seja RGB use 3, caso escala de cinza 1
+    depth = 3 # Profundidade das janelas utilizadas pelo modelo, caso seja RGB use 3, caso escala de cinza 1
     classes = 2 # Quantidade de classes que o modelo utilizará
     epochs = 10 # Quantidade de épocas (a quantidade de iterações que o modelo realizará durante o treinamento)
     init_lr = 1e-3 # Taxa de aprendizado a ser utilizado pelo optimizador
@@ -135,7 +140,7 @@ if __name__ == "__main__":
 
     # cria o novo DataFrame com os resultados atuais
     results_df = pd.DataFrame(H.history)
-    results_df['experiment_description'] = 'V1: Resultados do modelo inicial sem alterações'
+    results_df['experiment_description'] = "V2: Adicao de padrao RGB com o objetivo de captar mais caracteristicas, adicao de uma terceira camada para ajudar o modelo a capturar caracteristicas mais complexas, declarar neuronios de forma progressiva, diminuir filtros para 3x3 a fim de reduzir o risco de overfitting"
 
     # Concatena os antigos resultados com os novos
     final_results = pd.concat([old_results, results_df], ignore_index=True)
