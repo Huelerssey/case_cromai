@@ -1,7 +1,6 @@
 import streamlit as st
 import json
 from streamlit_lottie import st_lottie
-from streamlit_extras.colored_header import colored_header
 from streamlit_option_menu import option_menu
 import pages.separador.pagina_1 as PaginaUm
 import pages.separador.pagina_2 as PaginaDois
@@ -50,12 +49,7 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    # header azul
-    colored_header(
-    label="",
-    description="",
-    color_name="light-blue-70"
-    )
+    st.write("---")
 
     opcao_selecionada = option_menu(
         menu_title="Menu Inicial",

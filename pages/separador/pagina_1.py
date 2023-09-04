@@ -3,7 +3,6 @@ import numpy as np
 import time
 from src.data_utility import carregar_modelo
 from PIL import Image
-from streamlit_extras.colored_header import colored_header
 
 
 
@@ -16,12 +15,7 @@ def pagina1():
     # titulo da pagina
     st.markdown("<h2 style='text-align: center;'>🎰DogCatNator🎰</h2>", unsafe_allow_html=True)
 
-    # header azul
-    colored_header(
-    label="",
-    description="",
-    color_name="light-blue-70"
-    )
+    st.write("---")
 
     st.write("")
     st.markdown("<h4 style='text-align: center;'>Saudações, meus futuros coleguinhas de trabalho 😄! Recebi a grandiosa missão, como cientista de dados, de desenvolver um algoritmo capaz de identificar gatinhos malvados que adoram destruir poltronas e os adoráveis cachorrinhos que espalham alegria balançando seus rabinhos. Inspirado pelo e-mail que recebi do futuro, que clamava por ajuda, decidi agir. Apresento-lhes minha contribuição para salvar nosso planeta! 🌍🐾</h5>", unsafe_allow_html=True)
