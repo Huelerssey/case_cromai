@@ -5,7 +5,6 @@ from src.data_utility import carregar_modelo
 from PIL import Image
 
 
-
 # constroi a pagina 1
 def pagina1():
 

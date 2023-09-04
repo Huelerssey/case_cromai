@@ -4,7 +4,6 @@ from streamlit_lottie import st_lottie
 from streamlit_option_menu import option_menu
 import pages.separador.pagina_1 as PaginaUm
 import pages.separador.pagina_2 as PaginaDois
-import pages.separador.pagina_3 as PaginaTres
 
 
 # configurações da pagina
@@ -54,21 +53,17 @@ with st.sidebar:
     opcao_selecionada = option_menu(
         menu_title="Menu Inicial",
         menu_icon="justify",
-        options=["Página 1", "Página 2", "Página 3"],
-        icons=['bookmark', 'bookmark', 'bookmark'],
+        options=["Modelo Deep Learning", "Apresentando Resultados"],
+        icons=['code-square', 'rocket-takeoff'],
         default_index=0,
         orientation='vertical',
     )
 
 
 # Retorna a pagina 1
-if opcao_selecionada == "Página 1":
+if opcao_selecionada == "Modelo Deep Learning":
     PaginaUm.pagina1()
 
 # Retorna a pagina 2
-elif opcao_selecionada == "Página 2":
+elif opcao_selecionada == "Apresentando Resultados":
     PaginaDois.pagina2()
-
-# Retorna a pagina 3
-elif opcao_selecionada == "Página 3":
-    PaginaTres.pagina3()
