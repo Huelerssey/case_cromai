@@ -25,8 +25,50 @@ Para manter o modelo em produção e apresentar os resultados de maneira mais in
 Para rodar o projeto localmente, você pode seguir os seguintes passos:
 
 1. Clone o repositório.
-2. Instale as dependências usando `pip install -r requirements.txt` (para a versão de produção) ou `pip install -r requirements_legacy.txt` (para rodar o script de treinamento).
-3. Execute o script ou a aplicação conforme necessário.
+
+2. Crie um ambiente virtual:
+
+- **Windows**:
+
+  ```
+  python -m venv venv
+  .\venv\Scripts\activate
+  ```
+
+- **Linux/Mac**:
+
+  ```
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
+
+3. Instale as dependências:
+
+- Para a versão de produção:
+
+  ```
+  pip install -r requirements.txt
+  ```
+
+- Para rodar o script de treinamento:
+
+  ```
+  pip install -r requirements_legacy.txt
+  ```
+
+4. Execute o script ou a aplicação:
+
+- Para treinar o modelo localmente:
+
+  ```
+  python src/train.py
+  ```
+
+- Para executar a aplicação web em localhost:
+
+  ```
+  streamlit run app.py
+  ```
 
 ---
 

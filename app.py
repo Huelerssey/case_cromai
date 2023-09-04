@@ -7,15 +7,11 @@ import pages.separador.pagina_2 as PaginaDois
 
 
 # configurações da pagina
-st.set_page_config(
-    page_title='Doguinhos e Gatitos',
-    page_icon='🌈',
-    layout='wide'
-)
+st.set_page_config(page_title="Doguinhos e Gatitos", page_icon="🌈", layout="wide")
 
-#aplicar estilos de css a pagina
+# aplicar estilos de css a pagina
 with open("style.css") as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # animações
 with open("animacoes/animacao_lottie.json") as source:
@@ -23,12 +19,12 @@ with open("animacoes/animacao_lottie.json") as source:
 
 # Menu de navegação lateral
 with st.sidebar:
-
     # animação
     st_lottie(animacao, height=200, width=300)
 
     # badges
-    st.markdown("""
+    st.markdown(
+        """
     <div style="display: flex; justify-content: space-between;">
         <div>
             <a href="https://github.com/Huelerssey" target="_blank">
@@ -46,7 +42,9 @@ with st.sidebar:
             </a>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     st.write("---")
 
@@ -54,9 +52,9 @@ with st.sidebar:
         menu_title="Menu Inicial",
         menu_icon="justify",
         options=["Modelo Deep Learning", "Apresentando Resultados"],
-        icons=['code-square', 'rocket-takeoff'],
+        icons=["code-square", "rocket-takeoff"],
         default_index=0,
-        orientation='vertical',
+        orientation="vertical",
     )
 
 
