@@ -4,7 +4,6 @@ import time
 from src.data_utility import carregar_modelo
 from PIL import Image
 
-
 # constroi a pagina 1
 def pagina1():
     # carrega o modelo
@@ -19,7 +18,7 @@ def pagina1():
 
     st.write("")
     st.markdown(
-        "<h4 style='text-align: center;'>Saudações, meus futuros coleguinhas de trabalho 😄! Recebi a grandiosa missão, como cientista de dados, de desenvolver um algoritmo capaz de identificar gatinhos malvados que adoram destruir poltronas e os adoráveis cachorrinhos que espalham alegria balançando seus rabinhos. Inspirado pelo e-mail que recebi do futuro, que clamava por ajuda, decidi agir. Apresento-lhes minha contribuição para salvar nosso planeta! 🌍🐾</h5>",
+        "<h4 style='text-align: center;'>Saudações, meus futuros coleguinhas de trabalho 😄! ... </h5>",
         unsafe_allow_html=True,
     )
 
@@ -60,8 +59,23 @@ def pagina1():
             predictions = model.predict(img_array)
             class_names = ["Gato", "Cachorro"]
 
-            # Mostra a classificação
-            st.success(f"Esta imagem é um: {class_names[np.argmax(predictions[0])]}!")
+            # Obter a classe prevista e a probabilidade associada
+            max_prob_index = np.argmax(predictions[0])
+            predicted_class = class_names[max_prob_index]
+            max_probability = 100 * predictions[0][max_prob_index]
+
+            if max_probability < 90:  # Se a maior probabilidade for menor que 90%
+                st.warning("Parece que você não enviou uma foto clara de um gato ou cachorro. Por favor, tente outra imagem!")
+            else:
+                # Obter as probabilidades para Gato e Cachorro
+                prob_gato = 100 * predictions[0][0]
+                prob_cachorro = 100 * predictions[0][1]
+
+                # Mostra a classificação
+                st.success(f"O modelo classificou a imagem como um {predicted_class}.")
+                
+                # Mostra as probabilidades
+                st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
 
     with coluna2:
         st.write("")

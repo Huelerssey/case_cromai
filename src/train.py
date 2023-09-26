@@ -3,8 +3,8 @@ import re
 import pandas as pd
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers.convolutional import Conv2D
-from keras.layers.core import Activation, Flatten, Dense
+from keras.layers import Conv2D
+from keras.layers import Activation, Flatten, Dense
 from keras.layers import Rescaling, Dropout
 from keras.optimizers import Adam
 from keras.callbacks import ModelCheckpoint, EarlyStopping
